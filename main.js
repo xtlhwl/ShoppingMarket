@@ -4,7 +4,7 @@ import Vuex from 'vuex';
 import App from './app.vue';
 import './style.css';
 import Routers from "./router.js";
-
+import product_data from './product.js';
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
@@ -29,13 +29,23 @@ router.beforeEach((to, from, next) => {
 
 const store = new Vuex.Store({
     state:{
-
+        //商品列表数据
+        productList:[],
+        //购物车数据
+        carSList:[],
     },
     mutations:{
-
+        setProductList(state,data){
+            state.productList = data;
+        }
     },
     actions:{
-
+        getProductList(context){
+            setTimeout(()=>{
+                //真实环境用ajax获取，这里用异步获取   模仿ajax请求
+                context.commit('setProductList',product_data)
+            })
+        }
     },
 });
 
